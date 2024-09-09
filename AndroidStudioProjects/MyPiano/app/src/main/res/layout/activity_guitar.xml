@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.guitar.GuitarActivity">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_bg_guitar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:splitMotionEvents="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/containerControl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/string_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_guitar_string_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/string_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/ic_guitar_string_2"
+            app:layout_constraintTop_toBottomOf="@id/string_1" />
+
+        <ImageView
+            android:id="@+id/string_3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/ic_guitar_string_3"
+            app:layout_constraintTop_toBottomOf="@id/string_2" />
+
+        <ImageView
+            android:id="@+id/string_4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/ic_guitar_string_4"
+            app:layout_constraintTop_toBottomOf="@id/string_3" />
+
+        <ImageView
+            android:id="@+id/string_5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/ic_guitar_string_5"
+            app:layout_constraintTop_toBottomOf="@id/string_4" />
+
+        <ImageView
+            android:id="@+id/string_6"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/ic_guitar_string_6"
+            app:layout_constraintTop_toBottomOf="@id/string_5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerControl"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_black_corner_left_20"
+        android:paddingHorizontal="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/btnAm"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+
+            android:background="@drawable/ic_bg_guitar_note"
+            android:fontFamily="@font/font_600"
+            android:foreground="@drawable/fg_ripple_effect_round"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/am"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/btnBm"
+            app:layout_constraintEnd_toStartOf="@id/btnC"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/btnBm"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/ic_bg_guitar_note"
+            android:fontFamily="@font/font_600"
+
+            android:foreground="@drawable/fg_ripple_effect_round"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/bm"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/btnDm"
+            app:layout_constraintStart_toStartOf="@id/btnAm"
+            app:layout_constraintTop_toBottomOf="@id/btnAm" />
+
+        <TextView
+            android:id="@+id/btnDm"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/ic_bg_guitar_note"
+            android:fontFamily="@font/font_600"
+            android:foreground="@drawable/fg_ripple_effect_round"
+            android:gravity="center"
+
+            android:includeFontPadding="false"
+            android:text="@string/Dm"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/btnEm"
+            app:layout_constraintStart_toStartOf="@id/btnAm"
+            app:layout_constraintTop_toBottomOf="@id/btnBm" />
+
+        <TextView
+            android:id="@+id/btnEm"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/ic_bg_guitar_note"
+            android:fontFamily="@font/font_600"
+            android:foreground="@drawable/fg_ripple_effect_round"
+            android:gravity="center"
+
+            android:includeFontPadding="false"
+            android:text="@string/Em"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/btnHome"
+            app:layout_constraintStart_toStartOf="@id/btnAm"
+            app:layout_constraintTop_toBottomOf="@id/btnDm" />
+
+        <ImageView
+            android:id="@+id/btnHome"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/ic_home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/btnAm"
+            app:layout_constraintTop_toBottomOf="@id/btnEm" />
+
+        <TextView
+            android:id="@+id/btnC"
+            android:layout_width="@dimen/_40sdp"
+
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:background="@drawable/ic_bg_guitar_note"
+            android:fontFamily="@font/font_600"
+            android:foreground="@drawable/fg_ripple_effect"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/c"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnAm"
+            app:layout_constraintTop_toTopOf="@id/btnAm" />
+
+        <TextView
+            android:id="@+id/btnE"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+
+            android:layout_marginStart="@dimen/_16sdp"
+            android:background="@drawable/ic_bg_guitar_note"
+            android:fontFamily="@font/font_600"
+            android:foreground="@drawable/fg_ripple_effect_round"
+
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/e"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnBm"
+            app:layout_constraintTop_toTopOf="@id/btnBm" />
+
+        <TextView
+            android:id="@+id/btnF"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:background="@drawable/ic_bg_guitar_note"
+            android:fontFamily="@font/font_600"
+            android:foreground="@drawable/fg_ripple_effect_round"
+
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/f"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnDm"
+            app:layout_constraintTop_toTopOf="@id/btnDm" />
+
+        <TextView
+            android:id="@+id/btnG"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:background="@drawable/ic_bg_guitar_note"
+            android:fontFamily="@font/font_600"
+            android:foreground="@drawable/fg_ripple_effect_round"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/g"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnEm"
+            app:layout_constraintTop_toTopOf="@id/btnEm" />
+
+        <ImageView
+            android:id="@+id/btnStyle"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:foreground="@drawable/fg_ripple_effect"
+            android:src="@drawable/ic_guitar_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnHome"
+            app:layout_constraintTop_toTopOf="@id/btnHome" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

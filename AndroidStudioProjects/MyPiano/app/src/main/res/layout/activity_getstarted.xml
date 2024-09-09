@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_get_started_bg"
+    tools:context=".view.getstarted.GetStartedActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/tvComma"
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            android:fontFamily="@font/font_700"
+            android:src="@drawable/ic_text_1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/font_700"
+            android:gravity="center"
+            android:src="@drawable/ic_text_1"
+            android:text="@string/title_started"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvComma" />
+
+        <TextView
+            android:id="@+id/playPiano"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:foreground="@drawable/fg_ripple_effect_8"
+            android:background="@drawable/bg_gradient_learn"
+            android:fontFamily="@font/font_500"
+            android:includeFontPadding="false"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_12sdp"
+            android:text="@string/play_piano"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <TextView
+            android:id="@+id/home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/bg_lang_selected"
+            android:fontFamily="@font/font_500"
+            android:includeFontPadding="false"
+            android:foreground="@drawable/fg_ripple_effect_8"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_12sdp"
+            android:text="@string/home"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintTop_toBottomOf="@id/playPiano" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

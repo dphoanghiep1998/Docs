@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_bg_main"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/app_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:foreground="@drawable/fg_ripple_effect_round"
+        android:src="@drawable/ic_app_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnSetting"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:foreground="@drawable/fg_ripple_effect_round"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnPiano"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/app_name">
+
+        <ImageView
+            android:id="@+id/imagePiano"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:foreground="@drawable/fg_ripple_effect"
+            android:src="@drawable/ic_piano_main"
+            app:layout_constraintDimensionRatio="328:130"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPiano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:fontFamily="@font/font_700"
+            android:text="@string/play_piano"
+            android:textColor="@color/n2"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="@id/imagePiano"
+            app:layout_constraintEnd_toEndOf="@id/imagePiano"
+            app:layout_constraintTop_toTopOf="@id/imagePiano" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnGuitar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_6sdp"
+        android:foreground="@drawable/fg_ripple_effect"
+        app:layout_constraintEnd_toStartOf="@id/btnDrumSet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnPiano">
+
+        <ImageView
+            android:id="@+id/imageGuitar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_main_guitar"
+            app:layout_constraintDimensionRatio="156:128"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:fontFamily="@font/font_700"
+            android:text="@string/guitar"
+            android:textColor="@color/n2"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnDrumSet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:foreground="@drawable/fg_ripple_effect"
+        app:layout_constraintStart_toEndOf="@id/btnGuitar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnPiano">
+
+        <ImageView
+            android:id="@+id/imageDrumSet"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:foreground="@drawable/fg_ripple_effect"
+            android:src="@drawable/ic_drum_set_main"
+            app:layout_constraintDimensionRatio="156:128"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:fontFamily="@font/font_700"
+            android:text="@string/drumSet"
+            android:textColor="@color/n2"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnSaxophone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:foreground="@drawable/fg_ripple_effect"
+        app:layout_constraintStart_toStartOf="@id/btnGuitar"
+        app:layout_constraintEnd_toEndOf="@id/btnGuitar"
+        app:layout_constraintTop_toBottomOf="@id/btnGuitar">
+
+        <ImageView
+            android:id="@+id/imageSaxophone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_saxophone_main"
+            app:layout_constraintDimensionRatio="156:128"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:fontFamily="@font/font_700"
+            android:text="@string/saxophone"
+            android:textColor="@color/n2"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnTheme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:foreground="@drawable/fg_ripple_effect"
+        app:layout_constraintStart_toStartOf="@id/btnDrumSet"
+        app:layout_constraintEnd_toEndOf="@id/btnDrumSet"
+        app:layout_constraintTop_toBottomOf="@id/btnGuitar">
+
+        <ImageView
+            android:id="@+id/iamgeTheme"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_bg_theme_main"
+            app:layout_constraintDimensionRatio="156:128"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:fontFamily="@font/font_700"
+            android:text="@string/theme"
+            android:textColor="@color/n2"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

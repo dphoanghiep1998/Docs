@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="n2">#17181A</color>
+    <color name="n1">#000000</color>
+    <color name="n6">#ffffff</color>
+    <color name="n4">#626262</color>
+    <color name="n3">#373737</color>
+    <color name="accent">#F46700</color>
+    <color name="secondary_01">#4355F8</color>
+
+
+</resources>

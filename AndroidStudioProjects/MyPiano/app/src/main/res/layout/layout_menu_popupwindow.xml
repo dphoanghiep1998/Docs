@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="end">
+
+    <FrameLayout
+        android:id="@+id/btnBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerMain"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_black_corner_bottom_20"
+        android:padding="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_700"
+            android:text="@string/menu"
+            android:textSize="@dimen/_16sdp"
+            android:textColor="#fff"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnClose" />
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@color/n3"
+            app:layout_constraintTop_toBottomOf="@id/tvMenu" />
+
+        <TextView
+            android:id="@+id/tvShowNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:text="@string/show_notes"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line" />
+
+        <Switch
+            android:id="@+id/switchNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Custom_Switch"
+            android:thumb="@drawable/thumb"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tvShowNote"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvShowNote" />
+
+        <TextView
+
+            android:id="@+id/tvPitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/pitch"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvShowNote" />
+
+        <Switch
+            android:id="@+id/switchPitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Custom_Switch"
+            android:thumb="@drawable/thumb"
+            app:layout_constraintBottom_toBottomOf="@id/tvPitch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvPitch" />
+
+        <TextView
+            android:id="@+id/tvReverb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/reverb"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPitch" />
+
+        <Switch
+            android:id="@+id/switchReverb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Custom_Switch"
+            android:thumb="@drawable/thumb"
+            app:layout_constraintBottom_toBottomOf="@id/tvReverb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvReverb" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

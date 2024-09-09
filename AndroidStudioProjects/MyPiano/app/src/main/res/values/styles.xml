@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Custom_Switch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumb">@drawable/thumb</item>
+        <item name="android:track">@drawable/custom_track</item>
+    </style>
+    <style name="circular" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_12sdp</item>
+    </style>
+</resources>

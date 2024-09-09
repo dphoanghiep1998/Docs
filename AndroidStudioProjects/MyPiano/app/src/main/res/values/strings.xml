@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">MyPiano</string>
+
+    <string name="ENGLISH" translatable="false">English</string>
+    <string name="JAPANESE" translatable="false">日本</string>
+    <string name="KOREAN" translatable="false">"한국인 </string>
+    <string name="FRENCH" translatable="false">Français</string>
+    <string name="ITALIA" translatable="false">Italia</string>
+    <string name="GERMAN" translatable="false">Deutsch</string>
+    <string name="VIETNAM" translatable="false">Tiếng Việt</string>
+    <string name="INDONESIA" translatable="false">Indonesia</string>
+    <string name="BRAZIL" translatable="false">Brazil</string>
+    <string name="TURKEY" translatable="false">Türkiye</string>
+    <string name="SPAIN" translatable="false">España</string>
+    <string name="INDIA" translatable="false">भारत</string>
+    <string name="guitar">Guitar</string>
+    <string name="style">Style</string>
+    <string name="key_mode">Keys mode</string>
+    <string name="import_audio">Import audio</string>
+    <string name="size_key">Size key</string>
+    <string name="speed">Speed</string>
+    <string name="happy_birthday">Happy Birthday</string>
+    <string name="choose_other_keyboard">Choose other keyboard mode:</string>
+    <string name="double_key">Double keys</string>
+    <string name="two_players">Two players</string>
+    <string name="learn">Learn</string>
+    <string name="lesson">Lesson</string>
+    <string name="key_record">Keys Record</string>
+    <string name="mic_record">Mic Record</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu">Menu</string>
+    <string name="show_notes">Show notes</string>
+    <string name="pitch">Pitch</string>
+    <string name="reverb">Reverb</string>
+    <string name="jingbell">Jingle bell</string>
+    <string name="little_star">Little Star</string>
+    <string name="last_christmas">Last Christmas</string>
+    <string name="all_of_me">All Of Me</string>
+    <string name="play">Play</string>
+    <string name="piano_key_board">Piano keyboard</string>
+    <string name="save_success">Success! Save to</string>
+    <string name="record_list_u"><u>Record list</u></string>
+    <string name="new_record">New record</string>
+    <string name="save_file_record">Save file record</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="name_is_not_empty">File name can not be empty!</string>
+    <string name="rename">Rename</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+    <string name="apply">Apply</string>
+    <string name="style_piano">Style piano</string>
+    <string name="your_audio">Your Audio</string>
+    <string name="volume">Volume</string>
+    <string name="am">Am</string>
+    <string name="bm">Bm</string>
+    <string name="Dm">Dm</string>
+    <string name="Em">Em</string>
+    <string name="g">G</string>
+    <string name="f">F</string>
+    <string name="e">E</string>
+    <string name="c">C</string>
+    <string name="style_guitar">Style guitar</string>
+    <string name="style_drum_set">Style Drum Set</string>
+    <string name="learn_piano">Learn Piano</string>
+    <string name="play_piano">Play Piano</string>
+    <string name="drumSet">Drumset</string>
+    <string name="saxophone">Saxophone</string>
+    <string name="theme">Theme</string>
+    <string name="language">Language</string>
+    <string name="current_language">Current Language</string>
+    <string name="all_language">All Language</string>
+    <string name="title_started">When a beautiful music comes on, I want to play it myself and enjoy the music.</string>
+    <string name="home">Home</string>
+    <string name="include_ads">(This action can contain ads)</string>
+</resources>

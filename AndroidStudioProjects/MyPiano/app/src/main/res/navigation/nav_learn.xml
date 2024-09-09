@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_learn"
+    app:startDestination="@id/lessonFragment">
+
+    <fragment
+        android:id="@+id/lessonFragment"
+        android:name="com.neko.hiepdph.mypiano.view.piano.fragmentlearn.LessonFragment"
+        android:label="fragment_lesson"
+        tools:layout="@layout/fragment_lesson" />
+    <fragment
+        android:id="@+id/keyRecordFragment"
+        android:name="com.neko.hiepdph.mypiano.view.piano.fragmentlearn.KeyRecordFragment"
+        android:label="fragment_key_record"
+        tools:layout="@layout/fragment_key_record" />
+    <fragment
+        android:id="@+id/micRecordFragment"
+        android:name="com.neko.hiepdph.mypiano.view.piano.fragmentlearn.MicRecordFragment"
+        android:label="fragment_mic_record"
+        tools:layout="@layout/fragment_mic_record" />
+</navigation>
