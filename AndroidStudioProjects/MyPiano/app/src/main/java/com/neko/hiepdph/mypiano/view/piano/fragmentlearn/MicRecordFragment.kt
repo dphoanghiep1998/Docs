@@ -1,19 +1,25 @@
 package com.neko.hiepdph.mypiano.view.piano.fragmentlearn
 
-import android.media.session.PlaybackState
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.fragment.app.viewModels
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import com.neko.hiepdph.mypiano.R
+import com.neko.hiepdph.mypiano.common.Constant
 import com.neko.hiepdph.mypiano.common.base_component.BaseFragment
 import com.neko.hiepdph.mypiano.common.hide
 import com.neko.hiepdph.mypiano.common.show
+import com.neko.hiepdph.mypiano.data.model.MicRecord
 import com.neko.hiepdph.mypiano.databinding.FragmentMicRecordBinding
+import com.neko.hiepdph.mypiano.view.dialog.DialogDeleteFile
+import com.neko.hiepdph.mypiano.view.dialog.DialogSaveFile
 import com.neko.hiepdph.mypiano.view.piano.fragmentlearn.adapter.MicRecordAdapter
 import com.neko.hiepdph.mypiano.viewmodel.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +46,7 @@ class MicRecordFragment : BaseFragment<FragmentMicRecordBinding>() {
             @OptIn(UnstableApi::class)
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 super.onPlayerStateChanged(playWhenReady, playbackState)
-                Log.d("TAG", "onPlayerStateChanged: "+playbackState)
+                Log.d("TAG", "onPlayerStateChanged: " + playbackState)
 
                 if (playbackState == Player.STATE_ENDED) {
                     adapter?.resetStatus()
@@ -54,9 +60,9 @@ class MicRecordFragment : BaseFragment<FragmentMicRecordBinding>() {
 
     private fun observe() {
         viewModel.getListMicRecord().observe(this) {
-            if(it.isEmpty()){
+            if (it.isEmpty()) {
                 binding.icEmpty.show()
-            }else{
+            } else {
                 binding.icEmpty.hide()
             }
             adapter?.setData(it.toMutableList())
@@ -75,9 +81,38 @@ class MicRecordFragment : BaseFragment<FragmentMicRecordBinding>() {
             if (exoPlayer?.isPlaying == true) {
                 exoPlayer?.stop()
             }
-        }, onDelete = {}, onRename = {}, onShare = {})
+        }, onDelete = {
+            val dialogDeleteFile = DialogDeleteFile(requireContext(), onDelete = {
+                viewModel.deleteMicRecord(it.id)
+                Toast.makeText(requireContext(),requireActivity().getString(R.string.delete_success),Toast.LENGTH_SHORT).show()
+            })
+            dialogDeleteFile.show()
+        }, onRename = { item ->
+            val dialogSaveFile = DialogSaveFile(requireContext(), onSaveFile = {
+                item.apply {
+                    name = it
+                }
+                viewModel.insertMicRecord(item)
+                Toast.makeText(requireContext(),requireActivity().getString(R.string.rename_successfully),Toast.LENGTH_SHORT).show()
+            }, onCancelFile = {
+
+            }, item.name)
+            dialogSaveFile.show()
+        }, onShare = {
+            shareFile(it)
+        })
         binding.rcvMic.adapter = adapter
 
     }
-
+    private fun shareFile(item:MicRecord) {
+        try {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "*/*"
+            shareIntent.putExtra(Intent.EXTRA_STREAM, item.path)
+            shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(shareIntent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

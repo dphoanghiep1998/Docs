@@ -57,7 +57,6 @@ class StylePianoActivity : BaseActivity<ActivityStylePianoBinding>() {
 
         binding.btnApply.clickWithDebounce {
             config.indexTheme = binding.viewpager.currentItem
-            startActivity(Intent(this,PianoActivity::class.java))
             finish()
         }
     }

@@ -3,6 +3,7 @@ package com.neko.hiepdph.mypiano.view.piano
 import android.widget.SeekBar
 import com.neko.hiepdph.mypiano.common.base_component.BaseActivity
 import com.neko.hiepdph.mypiano.common.clickWithDebounce
+import com.neko.hiepdph.mypiano.common.config
 import com.neko.hiepdph.mypiano.databinding.ActivityDoubleKeyPianoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,6 +17,10 @@ class DoubleKeyPianoActivity: BaseActivity<ActivityDoubleKeyPianoBinding>() {
     }
 
     override fun initView() {
+        binding.pianoView.setIndexTheme(config.indexTheme)
+        binding.pianoView1.setIndexTheme(config.indexTheme)
+
+        binding.pianoView.setIndexTheme(config.indexTheme)
         binding.btnBackScroll.clickWithDebounce {
             val progress = binding.sb.progress
             if (progress - 10 <= 0) {

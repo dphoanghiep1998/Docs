@@ -90,9 +90,12 @@ class KeyRecordAdapter(
 
         bindingLayout.containerDelete.clickWithDebounce {
             onDelete.invoke(item)
+            popupWindowAdapter?.dismiss()
+
         }
         bindingLayout.containerRename.clickWithDebounce {
             onRename.invoke(item)
+            popupWindowAdapter?.dismiss()
         }
 
         val values = IntArray(2)

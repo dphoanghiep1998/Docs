@@ -1,8 +1,12 @@
 package com.neko.hiepdph.mypiano.common
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.SystemClock
 import android.view.View
 import com.neko.hiepdph.mypiano.common.mainconfig.MainConfig
@@ -54,5 +58,35 @@ fun View.hide() {
 fun View.show() {
     this.visibility = View.VISIBLE
 }
+fun isInternetAvailable(context: Context): Boolean {
+    val connectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        ?: return false
+    return when {
+        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) && capabilities.hasCapability(
+            NetworkCapabilities.NET_CAPABILITY_VALIDATED
+        ) -> true
 
+        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) && capabilities.hasCapability(
+            NetworkCapabilities.NET_CAPABILITY_VALIDATED
+        ) -> true
+
+        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) && capabilities.hasCapability(
+            NetworkCapabilities.NET_CAPABILITY_VALIDATED
+        ) -> true
+
+        else -> false
+    }
+
+}
+fun Context.openLink(strUri: String?) {
+    try {
+        val uri = Uri.parse(strUri)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
 

@@ -106,12 +106,16 @@ class MicRecordAdapter(
 
         bindingLayout.containerDelete.clickWithDebounce {
             onDelete.invoke(item)
+            popupWindowAdapter?.dismiss()
         }
         bindingLayout.containerRename.clickWithDebounce {
             onRename.invoke(item)
+            popupWindowAdapter?.dismiss()
         }
         bindingLayout.containerShare.clickWithDebounce {
             onShare.invoke(item)
+            popupWindowAdapter?.dismiss()
+
         }
         val values = IntArray(2)
         view.getLocationInWindow(values)

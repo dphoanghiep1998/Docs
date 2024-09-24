@@ -78,7 +78,16 @@ class GuitarActivity : BaseActivity<ActivityGuitarBinding>() {
 
     private fun initButton() {
 
+        changeBackPressCallBack {
+            if (!config.isUserRated) {
+                setResult(3001)
+            }
+            finish()
+        }
         binding.btnHome.clickWithDebounce {
+            if (!config.isUserRated) {
+                setResult(3001)
+            }
             finish()
         }
 

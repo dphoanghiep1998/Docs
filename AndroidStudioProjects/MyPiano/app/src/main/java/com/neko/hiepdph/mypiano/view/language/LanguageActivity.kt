@@ -15,6 +15,7 @@ import com.neko.hiepdph.mypiano.common.show
 import com.neko.hiepdph.mypiano.databinding.ActivityLanguageBinding
 import com.neko.hiepdph.mypiano.view.getstarted.GetStartedActivity
 import com.neko.hiepdph.mypiano.view.main.MainActivity
+import com.neko.hiepdph.mypiano.view.onboard.OnboardActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
@@ -27,6 +28,8 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
     }
 
     override fun initView() {
+        binding.btnCheck.show()
+        binding.loading.hide()
         currentLanguage = config.savedLanguage
         changeBackPressCallBack {
             if (intent.getBooleanExtra(Constant.KEY_FROM_MAIN, false)) {
@@ -42,15 +45,15 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
 
     private fun initButton() {
-        binding.btnCheck.hide()
-        binding.loading.show()
+        binding.btnCheck.show()
+        binding.loading.hide()
         binding.btnCheck.clickWithDebounce {
             clickApplyBtn()
         }
 
         binding.containerCurrentLanguage.clickWithDebounce {
             binding.tick.setImageResource(R.drawable.ic_tick_on)
-            binding.tvCountry.setTextColor(getColor(R.color.white))
+            binding.tvCountry.setTextColor(getColor(R.color.black))
             binding.containerCurrentLanguage.setBackgroundResource(R.drawable.bg_lang_selected)
             adapter?.removeSelectedId()
             currentLanguage = config.savedLanguage
@@ -63,7 +66,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
         if (!isFromMain) {
 //            pushEvent( "click_language_save")
             config.savedLanguage = currentLanguage
-            startActivity(Intent(this, GetStartedActivity::class.java))
+            startActivity(Intent(this, OnboardActivity::class.java))
             finish()
         } else {
             config.savedLanguage = currentLanguage
@@ -92,9 +95,9 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             supportDisplayLang().toMutableList()
         adapter = AdapterLanguage(this, onCLickItem = {
             currentLanguage = it.third.language
-            binding.tick.setImageResource(R.drawable.ic_tick_on)
-            binding.tvCountry.setTextColor(getColor(R.color.white))
-            binding.containerCurrentLanguage.setBackgroundResource(R.drawable.bg_n3_stroke_corner_8)
+            binding.tick.setImageResource(R.drawable.ic_tick_off)
+            binding.tvCountry.setTextColor(getColor(R.color.black))
+            binding.containerCurrentLanguage.setBackgroundResource(R.drawable.bg_lang_unselected)
 //            binding.imvFlag.setImageResource(it.second)
 //            binding.tvCountry.text = getText(it.first)
 //            val newDisplayLangList =
@@ -103,7 +106,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 //            adapter?.setData(newDisplayLangList)
         })
 
-//        adapter?.setData(mDisplayLangList)
+        adapter?.setData(mDisplayLangList)
         handleUnSupportLang(mDisplayLangList)
 
         binding.rcvLanguage.adapter = adapter

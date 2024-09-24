@@ -3,9 +3,11 @@ package com.neko.hiepdph.mypiano.view.drumset
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.AudioAttributes
 import android.media.SoundPool
+import android.view.MotionEvent
 import android.view.View
 import com.neko.hiepdph.mypiano.R
 import com.neko.hiepdph.mypiano.common.base_component.BaseActivity
@@ -79,7 +81,7 @@ class DrumSetActivity : BaseActivity<ActivityDrumsetBinding>() {
 
             ),
 
-        )
+            )
         listStyleDrumSet.add(
             DrumSetStyle(
                 1,
@@ -97,7 +99,7 @@ class DrumSetActivity : BaseActivity<ActivityDrumsetBinding>() {
                 background = R.drawable.ic_bg_drumset_2
 
             ),
-            )
+        )
         listStyleDrumSet.add(
             DrumSetStyle(
                 2,
@@ -158,91 +160,161 @@ class DrumSetActivity : BaseActivity<ActivityDrumsetBinding>() {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initButton() {
+        changeBackPressCallBack {
+            if (!config.isUserRated) {
+                setResult(3001)
+            }
+            finish()
+        }
         binding.btnHome.clickWithDebounce {
+            if (!config.isUserRated) {
+                setResult(3001)
+            }
             finish()
         }
 
         binding.btnStyle.clickWithDebounce {
-            startActivity(Intent(this,StyleDrumActivity::class.java))
+            startActivity(Intent(this, StyleDrumActivity::class.java))
             finish()
         }
 
-        binding.crashLeft.setOnClickListener {
-            startStringAnimation(binding.crashLeft)
-            soundPool?.play(crash1!!,1f,1f,1,0,1f)
+        binding.crashLeft.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                startStringAnimation(binding.crashLeft)
+                soundPool?.play(crash1!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
+
         }
 
-        binding.crashMiddle.setOnClickListener {
-            startStringAnimation(binding.crashMiddle)
-            soundPool?.play(crash2!!,1f,1f,1,0,1f)
+        binding.crashMiddle.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                startStringAnimation(binding.crashMiddle)
+                soundPool?.play(crash2!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
-        binding.crashRight.setOnClickListener {
+        binding.crashRight.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.crashRight)
-            soundPool?.play(crash3!!,1f,1f,1,0,1f)
+            soundPool?.play(crash3!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
-        binding.rideLeft.setOnClickListener {
+        binding.rideLeft.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.rideLeft)
-            soundPool?.play(ride!!,1f,1f,1,0,1f)
+            soundPool?.play(ride!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
-        binding.bellLeft.setOnClickListener {
+        binding.bellLeft.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.bellLeft)
-            soundPool?.play(bell!!,1f,1f,1,0,1f)
+            soundPool?.play(bell!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
-        binding.floorTomLeft.setOnClickListener {
+        binding.floorTomLeft.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.floorTomLeft)
-            soundPool?.play(tom1!!,1f,1f,1,0,1f)
+            soundPool?.play(tom1!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
-        binding.tom.setOnClickListener {
+        binding.tom.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.tom)
-            soundPool?.play(tom2!!,1f,1f,1,0,1f)
+            soundPool?.play(tom2!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
-        binding.floorTomRight.setOnClickListener {
+        binding.floorTomRight.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.floorTomRight)
-            soundPool?.play(tom3!!,1f,1f,1,0,1f)
+            soundPool?.play(tom3!!, 1f, 1f, 1, 0, 1f)
+            return@setOnTouchListener true
+        }
+        return@setOnTouchListener true
 
         }
-        binding.bellRight.setOnClickListener {
+        binding.bellRight.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.bellRight)
-            soundPool?.play(bell!!,1f,1f,1,0,1f)
+            soundPool?.play(bell!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
 
-        binding.rideRight.setOnClickListener {
+        binding.rideRight.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.rideRight)
-            soundPool?.play(ride!!,1f,1f,1,0,1f)
+            soundPool?.play(ride!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
 
-        binding.block.setOnClickListener {
+        binding.block.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.block)
-            soundPool?.play(pedal!!,1f,1f,1,0,1f)
-
+            soundPool?.play(pedal!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
         }
-        binding.kickLeft.setOnClickListener {
+        binding.kickLeft.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.kickLeft)
-            soundPool?.play(kick!!,1f,1f,1,0,1f)
+            soundPool?.play(kick!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
-        binding.snare.setOnClickListener {
+        binding.snare.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.snare)
-            soundPool?.play(snare!!,1f,1f,1,0,1f)
+            soundPool?.play(snare!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
-        binding.kickRight.setOnClickListener {
+        binding.kickRight.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.kickRight)
-            soundPool?.play(kick!!,1f,1f,1,0,1f)
+            soundPool?.play(kick!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
-        binding.tambourine.setOnClickListener {
+        binding.tambourine.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
             startStringAnimation(binding.tambourine)
-            soundPool?.play(tamborine!!,1f,1f,1,0,1f)
+            soundPool?.play(tamborine!!, 1f, 1f, 1, 0, 1f)
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener true
 
         }
     }

@@ -1,11 +1,10 @@
 package com.neko.hiepdph.mypiano.view.piano
 
-import android.content.Intent
 import android.content.res.ColorStateList
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.neko.hiepdph.mypiano.R
+import com.neko.hiepdph.mypiano.common.Constant
 import com.neko.hiepdph.mypiano.common.base_component.BaseActivity
 import com.neko.hiepdph.mypiano.common.clickWithDebounce
 import com.neko.hiepdph.mypiano.databinding.ActivityLearnBinding
@@ -13,44 +12,62 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LearnActivity : BaseActivity<ActivityLearnBinding>() {
+    private var navHostFragment: NavHostFragment? = null
+    private var navController: NavController? = null
+
     override fun getViewBinding(): ActivityLearnBinding {
         return ActivityLearnBinding.inflate(layoutInflater)
     }
 
     override fun initView() {
-
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentView) as NavHostFragment
+        navController = navHostFragment?.navController
         firstInit()
         initButton()
+        if (intent.getBooleanExtra(Constant.MIC, false)) {
+            setupViewContainer(2)
+            navController?.navigateUp()
+            navController?.navigate(R.id.micRecordFragment)
+        }
+        if (intent.getBooleanExtra(Constant.KEY, false)) {
+            setupViewContainer(1)
+            navController?.navigateUp()
+            navController?.navigate(R.id.keyRecordFragment)
+        }
+        intent.removeExtra(Constant.MIC)
+        intent.removeExtra(Constant.KEY)
     }
 
     private fun initButton() {
+
         binding.btnBack.clickWithDebounce {
-            startActivity(Intent(this,PianoActivity::class.java))
+            finish()
         }
 
         binding.containerLesson.clickWithDebounce {
-            if (findNavController(binding.fragmentView.id).currentDestination?.id != R.id.lessonFragment) {
+            if (navController?.currentDestination?.id != R.id.lessonFragment) {
                 setupViewContainer(0)
-                findNavController(binding.fragmentView.id).navigateUp()
-                findNavController(binding.fragmentView.id).navigate(R.id.lessonFragment)
+                navController?.navigateUp()
+                navController?.navigate(R.id.lessonFragment)
             }
 
         }
 
         binding.containerKeyRecord.clickWithDebounce {
-            if (findNavController(binding.fragmentView.id).currentDestination?.id != R.id.keyRecordFragment) {
+            if (navController?.currentDestination?.id != R.id.keyRecordFragment) {
                 setupViewContainer(1)
-                findNavController(binding.fragmentView.id).navigateUp()
-                findNavController(binding.fragmentView.id).navigate(R.id.keyRecordFragment)
+                navController?.navigateUp()
+                navController?.navigate(R.id.keyRecordFragment)
             }
 
         }
 
         binding.containerMicRecord.clickWithDebounce {
-            if (findNavController(binding.fragmentView.id).currentDestination?.id != R.id.micRecordFragment) {
+            if (navController?.currentDestination?.id != R.id.micRecordFragment) {
                 setupViewContainer(2)
-                findNavController(binding.fragmentView.id).navigateUp()
-                findNavController(binding.fragmentView.id).navigate(R.id.micRecordFragment)
+                navController?.navigateUp()
+                navController?.navigate(R.id.micRecordFragment)
             }
 
         }

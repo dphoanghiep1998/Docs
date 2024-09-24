@@ -62,11 +62,11 @@ class AdapterLanguage(
                     } else {
                         binding.tvCountry.setTextColor(
                             ContextCompat.getColor(
-                                context, R.color.white
+                                context, R.color.black
                             )
                         )
                         binding.container.background = ContextCompat.getDrawable(
-                            context, R.drawable.bg_n3_stroke_corner_8
+                            context, R.drawable.bg_lang_unselected
                         )
                         binding.tick.setImageResource(R.drawable.ic_tick_off)
 

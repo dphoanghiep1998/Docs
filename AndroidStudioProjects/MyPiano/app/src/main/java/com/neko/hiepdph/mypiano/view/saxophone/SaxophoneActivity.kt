@@ -9,6 +9,7 @@ import android.view.View
 import com.neko.hiepdph.mypiano.R
 import com.neko.hiepdph.mypiano.common.base_component.BaseActivity
 import com.neko.hiepdph.mypiano.common.clickWithDebounce
+import com.neko.hiepdph.mypiano.common.config
 import com.neko.hiepdph.mypiano.databinding.ActivitySaxophoneBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,6 +55,12 @@ class SaxophoneActivity : BaseActivity<ActivitySaxophoneBinding>() {
     }
 
     override fun initView() {
+        changeBackPressCallBack {
+            if (!config.isUserRated) {
+                setResult(3001)
+            }
+            finish()
+        }
         initSoundPool()
 
 
@@ -62,6 +69,9 @@ class SaxophoneActivity : BaseActivity<ActivitySaxophoneBinding>() {
 
     private fun initButton() {
         binding.btnHome.clickWithDebounce {
+            if (!config.isUserRated) {
+                setResult(3001)
+            }
             finish()
         }
 

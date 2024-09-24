@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class MicRecord(
-    val id: Int = -1, val name: String, val time: Long, val duration: Int, val path: String
+    val id: Int = -1, var name: String, val time: Long, val duration: Int, val path: String
 ) : Parcelable {
     fun toMicRecordEntity(): MicRecordEntity {
         val newId = if (id == -1) 0 else id

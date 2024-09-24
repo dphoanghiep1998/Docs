@@ -16,7 +16,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun initView() {
         Handler().postDelayed({
-            startActivity(Intent(this, GetStartedActivity::class.java))
+            startActivity(Intent(this, LanguageActivity::class.java))
             finish()
         }, 2000)
     }

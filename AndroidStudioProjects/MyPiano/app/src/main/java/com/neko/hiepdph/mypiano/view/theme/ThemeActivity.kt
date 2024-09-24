@@ -19,6 +19,9 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
     }
 
     override fun initView() {
+        binding.btnApply.isEnabled = true
+        binding.btnApply.setTextColor(getColor(R.color.white))
+        binding.btnApply.setBackgroundResource(R.drawable.bg_gradient_learn)
         currentIndex = config.indexThumbMain
         binding.btnBack.clickWithDebounce {
             finish()
@@ -30,15 +33,9 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         }
         adapter = AdapterTheme {
             currentIndex = it.id
-            if(currentIndex != config.indexThumbMain){
-                binding.btnApply.isEnabled = true
-                binding.btnApply.setTextColor(getColor(R.color.white))
-                binding.btnApply.setBackgroundResource(R.drawable.bg_gradient_learn)
-            }else{
-                binding.btnApply.isEnabled = false
-                binding.btnApply.setTextColor(getColor(R.color.n4))
-                binding.btnApply.setBackgroundResource(R.drawable.bg_n3_corner_8)
-            }
+            binding.btnApply.isEnabled = true
+            binding.btnApply.setTextColor(getColor(R.color.white))
+            binding.btnApply.setBackgroundResource(R.drawable.bg_gradient_learn)
         }
         val gridLayoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
         binding.rcvTheme.layoutManager = gridLayoutManager
@@ -46,7 +43,7 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         binding.rcvTheme.adapter = adapter
 
         val listData = mutableListOf(
-            ThemeMainModel(0, R.drawable.ic_theme_main_1),
+            ThemeMainModel(0, R.drawable.ic_theme_main_27),
             ThemeMainModel(1, R.drawable.ic_theme_main_2),
             ThemeMainModel(2, R.drawable.ic_theme_main_3),
             ThemeMainModel(3, R.drawable.ic_theme_main_4),
@@ -66,6 +63,13 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             ThemeMainModel(17, R.drawable.ic_theme_main_18),
             ThemeMainModel(18, R.drawable.ic_theme_main_19),
             ThemeMainModel(19, R.drawable.ic_theme_main_20),
+            ThemeMainModel(20, R.drawable.ic_theme_main_21),
+            ThemeMainModel(21, R.drawable.ic_theme_main_22),
+            ThemeMainModel(22, R.drawable.ic_theme_main_23),
+            ThemeMainModel(23, R.drawable.ic_theme_main_24),
+            ThemeMainModel(24, R.drawable.ic_theme_main_25),
+            ThemeMainModel(25, R.drawable.ic_theme_main_26),
+            ThemeMainModel(26, R.drawable.ic_theme_main_1),
         )
         adapter?.setData(listData)
         adapter?.setSelected(currentIndex)

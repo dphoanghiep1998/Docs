@@ -17,6 +17,7 @@ import android.widget.SeekBar
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -31,6 +32,8 @@ import com.neko.hiepdph.mypiano.common.base_component.BaseActivity
 import com.neko.hiepdph.mypiano.common.buildMinVersion33
 import com.neko.hiepdph.mypiano.common.clickWithDebounce
 import com.neko.hiepdph.mypiano.common.config
+import com.neko.hiepdph.mypiano.common.customview.ChangeXInterface
+import com.neko.hiepdph.mypiano.common.customview.CustomGuideView
 import com.neko.hiepdph.mypiano.common.customview.tickseekbar.OnSeekChangeListener
 import com.neko.hiepdph.mypiano.common.customview.tickseekbar.SeekParams
 import com.neko.hiepdph.mypiano.common.customview.tickseekbar.TickSeekBar
@@ -57,6 +60,7 @@ import com.neko.hiepdph.mypiano.view.main.MainActivity
 import com.neko.hiepdph.mypiano.view.success.SaveSuccessActivity
 import com.neko.hiepdph.mypiano.viewmodel.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 import java.io.File
 import java.util.Timer
 import java.util.TimerTask
@@ -142,7 +146,6 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
 
 
     override fun initView() {
-        Log.d("TAG", "initView: ")
 
         initExoplayer()
 
@@ -167,12 +170,45 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
         initVolumeWindow()
         initPiano()
         initButton()
+        val changeXInterface =
+            ChangeXInterface { progress ->
+                binding.sb.progress = progress
+            }
+        binding.pianoView.setChangeXListener(changeXInterface)
+        binding.pianoView.post{
+            binding.pianoView.scrollToC3()
+        }
 
-
+        if (config.isFirstOpenPiano) {
+            CustomGuideView.Builder(this).setContentText(getString(R.string.guide_1))
+                .setContentTypeFace(
+                    ResourcesCompat.getFont(this, R.font.font_400)
+                ).setTargetView(binding.tvSong).setContentTextSize(20)
+                .setDismissType(DismissType.outside)
+                .setGravity(smartdevelop.ir.eram.showcaseviewlib.config.Gravity.center)
+                .setGuideListener {
+                    CustomGuideView.Builder(this).setContentText(getString(R.string.guide_2))
+                        .setContentTypeFace(
+                            ResourcesCompat.getFont(this, R.font.font_400)
+                        ).setTargetView(binding.tvSpeed).setContentTextSize(20)
+                        .setDismissType(DismissType.outside)
+                        .setGravity(smartdevelop.ir.eram.showcaseviewlib.config.Gravity.center)
+                        .setGuideListener {
+                            CustomGuideView.Builder(this)
+                                .setContentText(getString(R.string.guide_3)).setContentTypeFace(
+                                    ResourcesCompat.getFont(this, R.font.font_400)
+                                ).setTargetView(binding.btnStyle).setContentTextSize(20)
+                                .setDismissType(DismissType.outside)
+                                .setGravity(smartdevelop.ir.eram.showcaseviewlib.config.Gravity.center)
+                                .build().show()
+                        }.build().show()
+                }.build().show()
+            config.isFirstOpenPiano = false
+        }
     }
 
     private fun initPiano() {
-
+        binding.pianoView.setIndexTheme(config.indexTheme)
         binding.pianoView.setSoundPollMaxStream(10)
         binding.sb.thumbOffset = SEEKBAR_OFFSET_SIZE
         binding.pianoView.setPianoListener(object : OnPianoListener {
@@ -380,12 +416,25 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
             }
         }
 
-
-
-        binding.btnHome.clickWithDebounce {
+        changeBackPressCallBack {
+            if(!config.isUserRated){
+                setResult(3001)
+            }
             if (!MainActivity.isRunning) {
                 startActivity(Intent(this, MainActivity::class.java).apply {
 
+                })
+            }
+            finish()
+        }
+
+        binding.btnHome.clickWithDebounce {
+            if(!config.isUserRated){
+                setResult(3001)
+            }
+            if (!MainActivity.isRunning) {
+                startActivity(Intent(this, MainActivity::class.java).apply {
+                    putExtra(Constant.KEY_USER_RATED,true)
                 })
             }
             finish()
@@ -446,7 +495,6 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
 
         binding.tvSong.clickWithDebounce {
             activityLauncher.launch(Intent(this, LearnActivity::class.java))
-            finish()
         }
 
         binding.btnMenu.clickWithDebounce {
@@ -454,8 +502,7 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
         }
 
         binding.btnStyle.clickWithDebounce {
-            startActivity(Intent(this, StylePianoActivity::class.java))
-            finish()
+            activityLauncherForStyle.launch(Intent(this, StylePianoActivity::class.java))
         }
 
         binding.containerRecord.clickWithDebounce {
@@ -608,8 +655,9 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
 
             viewModel.insertKeyRecord(keyRecord!!)
             second = 0
-            activityLauncher.launch(Intent(this, SaveSuccessActivity::class.java))
-            finish()
+            activityLauncher.launch(Intent(this, SaveSuccessActivity::class.java).apply {
+                putExtra(Constant.IS_KEY_RECORD, true)
+            })
 
         }, onCancelFile = {
             second = 0
@@ -644,8 +692,9 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
                     MicRecord(-1, it, System.currentTimeMillis(), second, "$filesDir/$it")
                 viewModel.insertMicRecord(micRecord)
                 second = 0
-                startActivity(Intent(this, SaveSuccessActivity::class.java))
-                finish()
+                activityLauncher.launch(Intent(this, SaveSuccessActivity::class.java).apply {
+                    putExtra(Constant.IS_MIC_RECORD, true)
+                })
             }, onCancelFile = {
                 File(filesDir, mName).delete()
                 second = 0
@@ -761,6 +810,7 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
 
 
     private fun setShowNote() {
+        binding.pianoView.setIndexTheme(config.indexTheme)
         binding.pianoView.setShowNote(config.showNote)
     }
 
@@ -768,6 +818,38 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == 101) {
                 setupPlayer()
+            }
+            if (it.resultCode == 3000) {
+                val dialogRecord = DialogRecord(this, onClickKey = {
+                    isKeyRecord = true
+                    firstTimeRecord = System.currentTimeMillis()
+                    keyRecord = KeysRecord(-1, "", firstTimeRecord, 0, mutableListOf())
+                    initTimer()
+                    binding.tvTime.show()
+                    binding.containerRec.hide()
+                    binding.tvTime.clickWithDebounce {
+                        afterRecordKey()
+                    }
+                }, onClickMic = {
+                    isKeyRecord = false
+
+                    if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                        //do smt
+                        doRecordAudio()
+                    } else {
+                        if (shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
+                            activityLauncherForPermissionRecord.launch(
+                                Intent(
+                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                    Uri.fromParts("package", packageName, null)
+                                )
+                            )
+                        } else {
+                            permissionRecordLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                        }
+                    }
+                })
+                dialogRecord.show()
             }
         }
 
@@ -816,6 +898,49 @@ class PianoActivity : BaseActivity<ActivityPianoBinding>() {
                 }
             }
         }
+
+    private var activityLauncherForStyle =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            binding.pianoView.setIndexTheme(config.indexTheme)
+            binding.pianoView.resetKey()
+        }
+
+    private var activityLauncherForSuccess =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == 3000) {
+                val dialogRecord = DialogRecord(this, onClickKey = {
+                    isKeyRecord = true
+                    firstTimeRecord = System.currentTimeMillis()
+                    keyRecord = KeysRecord(-1, "", firstTimeRecord, 0, mutableListOf())
+                    initTimer()
+                    binding.tvTime.show()
+                    binding.containerRec.hide()
+                    binding.tvTime.clickWithDebounce {
+                        afterRecordKey()
+                    }
+                }, onClickMic = {
+                    isKeyRecord = false
+
+                    if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                        //do smt
+                        doRecordAudio()
+                    } else {
+                        if (shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
+                            activityLauncherForPermissionRecord.launch(
+                                Intent(
+                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                    Uri.fromParts("package", packageName, null)
+                                )
+                            )
+                        } else {
+                            permissionRecordLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                        }
+                    }
+                })
+                dialogRecord.show()
+            }
+        }
+
 
     private var permissionRecordLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()

@@ -14,18 +14,31 @@ class SaveSuccessActivity : BaseActivity<ActivitySaveSuccessBinding>() {
     }
 
     override fun initView() {
+        val isKeyRecord = intent.getBooleanExtra(Constant.IS_KEY_RECORD,false)
+        val isMicRecord = intent.getBooleanExtra(Constant.IS_MIC_RECORD,false)
         binding.btnClose.clickWithDebounce {
             finish()
         }
 
         binding.tvRecordList.clickWithDebounce {
-            startActivity(Intent(this, LearnActivity::class.java))
+            if(isKeyRecord){
+                startActivity(Intent(this, LearnActivity::class.java).apply {
+                    putExtra(Constant.KEY,true)
+                })
+            }
+            if(isMicRecord){
+                startActivity(Intent(this, LearnActivity::class.java).apply {
+                    putExtra(Constant.MIC,true)
+                })
+            }
         }
 
-        binding.tvSuccess.clickWithDebounce {
-            startActivity(Intent(this, PianoActivity::class.java).apply {
-                putExtra(Constant.KEY_RECORD_AGAIN, true)
-            })
+        binding.btnNewRecord.clickWithDebounce {
+//            startActivity(Intent(this, PianoActivity::class.java).apply {
+//                addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+//                putExtra(Constant.KEY_RECORD_AGAIN, true)
+//            })
+            setResult(3000)
             finish()
         }
     }

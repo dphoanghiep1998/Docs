@@ -27,6 +27,10 @@ class GetStartedActivity : BaseActivity<ActivityGetstartedBinding>() {
             startActivity(Intent(this,PianoActivity::class.java))
             finish()
         }
+
+        changeBackPressCallBack {
+
+        }
     }
 
 }

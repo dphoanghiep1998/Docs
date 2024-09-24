@@ -62,4 +62,20 @@ class MainConfig(private val context: Context) {
         set(indexThumbMain) = AppSharePreference.getInstance(context)
             .saveInt(Constant.KEY_INDEX_THEME_MAIN, indexThumbMain)
 
+    var isUserRated: Boolean
+        get() = AppSharePreference.getInstance(context).getBoolean(Constant.KEY_USER_RATED, false)
+        set(isUserRated) = AppSharePreference.getInstance(context)
+            .saveBoolean(Constant.KEY_USER_RATED, isUserRated)
+
+    var timeShowRate: Long
+        get() = AppSharePreference.getInstance(context).getLong(Constant.TIME_SHOW_RATE, 0)
+        set(timeShowRate) = AppSharePreference.getInstance(context)
+            .saveLong(Constant.TIME_SHOW_RATE, timeShowRate)
+
+    var isFirstOpenPiano: Boolean
+        get() = AppSharePreference.getInstance(context)
+            .getBoolean(Constant.KEY_FIRST_OPEN_PIANO, true)
+        set(isFirstOpenPiano) = AppSharePreference.getInstance(context)
+            .saveBoolean(Constant.KEY_FIRST_OPEN_PIANO, isFirstOpenPiano)
+
 }

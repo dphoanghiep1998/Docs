@@ -7,6 +7,7 @@ package com.neko.hiepdph.mypiano.data.model;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
@@ -68,7 +69,7 @@ public class Piano {
 
             blackKeyWidth = (int) (blackDrawable.getIntrinsicWidth() * 1.2 * scaleX);
             blackKeyHeight = (int) ((float) blackDrawable.getIntrinsicHeight() * scaleY * 9 / 10);
-            whiteKeyWidth = (int) (whiteDrawable.getIntrinsicWidth() * 1.4 *scaleX);
+            whiteKeyWidth = (int) (whiteDrawable.getIntrinsicWidth() * 1.4 * scaleX);
             whiteKeyHeight = (int) ((float) whiteDrawable.getIntrinsicHeight() * scaleY);
 
             //初始化黑键
@@ -296,6 +297,7 @@ public class Piano {
         return null;
     }
 
+
     /**
      * 设置白色键图案的位置
      *
@@ -308,7 +310,7 @@ public class Piano {
         if (group == 0) {
             offset = 5;
         }
-        drawable.setBounds((7 * group - 5 + offset + positionOfGroup) * whiteKeyWidth, 0, (7 * group - 4 + offset + positionOfGroup) * whiteKeyWidth, whiteKeyHeight);
+        drawable.setBounds((7 * group - 5 + offset + positionOfGroup) * whiteKeyWidth + 4, 0, (7 * group - 4 + offset + positionOfGroup) * whiteKeyWidth, whiteKeyHeight);
     }
 
     /**

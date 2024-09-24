@@ -1,7 +1,6 @@
 package com.neko.hiepdph.mypiano.view.piano.fragmentlearn
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -11,6 +10,8 @@ import com.neko.hiepdph.mypiano.common.hide
 import com.neko.hiepdph.mypiano.common.show
 import com.neko.hiepdph.mypiano.data.model.KeysRecord
 import com.neko.hiepdph.mypiano.databinding.FragmentKeyRecordBinding
+import com.neko.hiepdph.mypiano.view.dialog.DialogDeleteFile
+import com.neko.hiepdph.mypiano.view.dialog.DialogSaveFile
 import com.neko.hiepdph.mypiano.view.piano.PianoActivity
 import com.neko.hiepdph.mypiano.view.piano.fragmentlearn.adapter.KeyRecordAdapter
 import com.neko.hiepdph.mypiano.viewmodel.AppViewModel
@@ -34,9 +35,9 @@ class KeyRecordFragment : BaseFragment<FragmentKeyRecordBinding>() {
 
     private fun observeData() {
         viewModel.getListKeyRecord().observe(this) {
-            if(it.isEmpty()){
+            if (it.isEmpty()) {
                 binding.icEmpty.show()
-            }else{
+            } else {
                 binding.icEmpty.hide()
             }
             adapter?.setData(it.toMutableList())
@@ -46,7 +47,23 @@ class KeyRecordFragment : BaseFragment<FragmentKeyRecordBinding>() {
     private fun initRecyclerView() {
         adapter = KeyRecordAdapter(onClickItem = {
             setSongAutoPlay(it)
-        }, onRename = {}, onDelete = {})
+        }, onRename = { item ->
+
+            val dialogSaveFile = DialogSaveFile(requireContext(), onSaveFile = {
+                item.apply {
+                    name = it
+                }
+                viewModel.insertKeyRecord(item)
+            }, onCancelFile = {
+
+            }, item.name)
+            dialogSaveFile.show()
+        }, onDelete = {
+            val dialogDeleteFile = DialogDeleteFile(requireContext(), onDelete = {
+                viewModel.deleteKeyRecord(it.id)
+            })
+            dialogDeleteFile.show()
+        })
 
         binding.rcvKey.adapter = adapter
     }

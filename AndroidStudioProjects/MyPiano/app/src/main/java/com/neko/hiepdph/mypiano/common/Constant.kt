@@ -1,8 +1,21 @@
 package com.neko.hiepdph.mypiano.common
 
+import com.neko.hiepdph.mypiano.BuildConfig
+
 object Constant {
-    const val KEY_FROM_MAIN="KEY_FROM_MAIN"
-    const val KEY_INDEX_THEME_MAIN="KEY_INDEX_THEME_MAIN"
+    const val TIME_SHOW_RATE = "TIME_SHOW_RATE"
+    const val KEY_FIRST_OPEN_PIANO = "KEY_FIRST_OPEN_PIANO"
+    const val IS_KEY_RECORD = "IS_KEY_RECORD"
+    const val IS_MIC_RECORD = "IS_MIC_RECORD"
+    const val KEY = "KEY"
+    const val MIC = "MIC"
+    const val KEY_USER_RATED = "KEY_USER_RATED"
+    const val URL_APP =
+        "https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}"
+
+    const val URL_PRIVACY = "https://sites.google.com/view/nksoftpolicy/home"
+    const val KEY_FROM_MAIN = "KEY_FROM_MAIN"
+    const val KEY_INDEX_THEME_MAIN = "KEY_INDEX_THEME_MAIN"
     const val KEY_INDEX_THEME_DRUM = "KEY_INDEX_THEME_DRUM"
     const val KEY_INDEX_THEME_GUITAR = "KEY_INDEX_THEME_GUITAR"
     const val KEY_INDEX_THEME = "KEY_INDEX_THEME"

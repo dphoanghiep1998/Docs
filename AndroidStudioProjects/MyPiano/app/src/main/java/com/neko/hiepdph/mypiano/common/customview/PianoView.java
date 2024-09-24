@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.IntStream;
 
 /**
  * Created by ChengTao on 2016-11-25.
@@ -49,6 +50,8 @@ public class PianoView extends View {
     private Paint paint;
     //定义标识音名的正方形
     private RectF square;
+
+    private ChangeXInterface changeXListener;
     //正方形背景颜色
     private String pianoColors[] = {"#C0C0C0", "#A52A2A", "#FF8C00", "#FFFF00", "#00FA9A", "#00CED1", "#4169E1", "#FFB6C1", "#FFEBCD"};
     //播放器工具
@@ -60,6 +63,8 @@ public class PianoView extends View {
     //缩放比例
     private float scaleX = 1;
     private float scaleY = 1;
+
+    private int indexTheme = 0;
     //音频加载接口
     private OnLoadAudioListener loadAudioListener;
     //自动播放接口
@@ -76,6 +81,11 @@ public class PianoView extends View {
     private boolean isInitFinish = false;
     private int minRange = 0;
     private int maxRange = 0;
+
+    //den
+    private int[] type1 = {0, 3, 5, 6, 10, 11, 14, 15, 16, 20, 28, 32, 33};
+
+    //trang
     //
     private int maxStream;
     //自动播放Handler
@@ -96,6 +106,10 @@ public class PianoView extends View {
 
     private ArrayList<Float> listScale = new ArrayList<>();
     private int currentIndex = 2;
+
+    public void setChangeXListener(ChangeXInterface changeXListener) {
+        this.changeXListener = changeXListener;
+    }
 
 
     //构造函数
@@ -138,6 +152,11 @@ public class PianoView extends View {
             scaleX = (Float) listScale.get(currentIndex);
             invalidate();
         }
+    }
+
+    public void setIndexTheme(int index) {
+        indexTheme = index;
+        invalidate();
     }
 
     public void decreaseSizeKey() {
@@ -218,55 +237,76 @@ public class PianoView extends View {
                 }
             }
         }
+        canvas.save();
         //初始化白键
         if (whitePianoKeys != null) {
             for (int i = 0; i < whitePianoKeys.size(); i++) {
                 for (PianoKey key : whitePianoKeys.get(i)) {
-//          paint.setColor(Color.parseColor(pianoColors[i]));
                     Rect r = key.getKeyDrawable().getBounds();
                     int sideLength = (r.right - r.left) / 2;
                     int left = r.left + sideLength / 2;
-                    int top = r.bottom - sideLength - sideLength / 3 - 10;
+                    int top = r.bottom - sideLength - sideLength / 3 - 15;
                     int right = r.right - sideLength / 2;
                     int bottom = r.bottom - sideLength / 3 - 30;
+//                    canvas.translate(4,0);
                     key.getKeyDrawable().draw(canvas);
                     square.set(left, top, right, bottom);
 
                     if (key.getLetterName().startsWith("C") || Objects.equals(key.getLetterName(), "A0")) {
                         if (isShowNote) {
+                            paint.setStyle(Paint.Style.FILL);
+                            paint.setColor(Color.parseColor("#FFFFFF"));
+                            canvas.drawRoundRect(square, 16f, 16f, paint);
                             paint.setStyle(Paint.Style.STROKE);
                             paint.setColor(Color.parseColor("#CBD6CD"));
                             paint.setStrokeWidth(2);
                             //初始化音名区域
                             canvas.drawRoundRect(square, 16f, 16f, paint);
+                            if (isShowNote) {
+                                //den
+                                paint.setColor(Color.BLACK);
+                                paint.setStyle(Paint.Style.FILL);
+                                paint.setTextSize(sideLength / 1.8f);
+                                Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+                                int baseline = (int) ((square.bottom + square.top - fontMetrics.bottom - fontMetrics.top) / 2);
+                                paint.setTextAlign(Paint.Align.CENTER);
+                                canvas.drawText(key.getLetterName(), square.centerX(), baseline, paint);
+                            }
                         }
 
+                    } else {
+                        if (isShowNote) {
+                            //den
+                            if (IntStream.of(type1).anyMatch(x -> x == indexTheme)) {
+                                paint.setColor(Color.BLACK);
+                            } else {
+                                paint.setColor(Color.WHITE);
+                            }
+                            paint.setStyle(Paint.Style.FILL);
+                            paint.setTextSize(sideLength / 1.8f);
+                            Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+                            int baseline = (int) ((square.bottom + square.top - fontMetrics.bottom - fontMetrics.top) / 2);
+                            paint.setTextAlign(Paint.Align.CENTER);
+                            canvas.drawText(key.getLetterName(), square.centerX(), baseline, paint);
+                        }
                     }
-                    if (isShowNote) {
-                        paint.setColor(Color.BLACK);
-                        paint.setStyle(Paint.Style.FILL);
 
-                        paint.setTextSize(sideLength / 1.8f);
-                        Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
-                        int baseline = (int) ((square.bottom + square.top - fontMetrics.bottom - fontMetrics.top) / 2);
-                        paint.setTextAlign(Paint.Align.CENTER);
-                        canvas.drawText(key.getLetterName(), square.centerX(), baseline, paint);
-                    }
 
                 }
             }
         }
+        canvas.restore();
+        canvas.translate(0, 20);
         //初始化黑键
         if (blackPianoKeys != null) {
-            canvas.save();
-            canvas.translate(0, 20);
             for (int i = 0; i < blackPianoKeys.size(); i++) {
                 for (PianoKey key : blackPianoKeys.get(i)) {
+                    Log.d(TAG, "onDraw: " + i);
                     key.getKeyDrawable().draw(canvas);
                 }
             }
-            canvas.restore();
         }
+
         if (!isInitFinish && piano != null && pianoListener != null) {
             isInitFinish = true;
             pianoListener.onPianoInitFinish();
@@ -462,9 +502,7 @@ public class PianoView extends View {
                     try {
                         if (autoPlayEntities != null) {
                             for (AutoPlayEntity entity : autoPlayEntities) {
-                                Log.d(TAG, "run: " + entity);
-                                Log.d(TAG, "blackPianoKeys: " + blackPianoKeys);
-                                Log.d(TAG, "run: " + whitePianoKeys);
+
                                 if (entity != null) {
                                     if (entity.getType() != null) {
                                         switch (entity.getType()) {
@@ -623,6 +661,15 @@ public class PianoView extends View {
         maxRange = x + getLayoutWidth();
         this.scrollTo(x, 0);
         this.progress = progress;
+    }
+
+    public void scrollToC3() {
+        int x;
+        x = (int) (19 * 145 * scaleX + 17 * 4);
+        this.scrollTo(x, 0);
+        float progress = ((float) x * 100 / (getPianoWidth() - getLayoutWidth()));
+        this.progress = (int) progress;
+        changeXListener.onChange((int) progress);
     }
 
     /**

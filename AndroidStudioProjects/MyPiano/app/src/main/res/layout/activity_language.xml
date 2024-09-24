@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/ic_bg_setting"
     android:layout_height="match_parent">
 
     <TextView
@@ -11,9 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_12sdp"
-        android:fontFamily="@font/font_500"
+        android:fontFamily="@font/font_700"
         android:text="@string/language"
         android:textSize="@dimen/_18sdp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +39,7 @@
             android:paddingHorizontal="@dimen/_14sdp"
             android:paddingVertical="@dimen/_8sdp"
             android:text="@string/apply"
-            android:fontFamily="@font/font_400"
+            android:fontFamily="@font/font_500"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:fontFamily="@font/font_500"
+        android:fontFamily="@font/font_700"
         android:text="@string/current_language"
         android:textColor="@color/accent"
         android:textSize="@dimen/_14sdp"
@@ -115,7 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_12sdp"
-        android:fontFamily="@font/font_500"
+        android:fontFamily="@font/font_700"
         android:text="@string/all_language"
         android:textColor="@color/accent"
         android:textSize="@dimen/_14sdp"
