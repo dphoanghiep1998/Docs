@@ -97,4 +97,5 @@ dependencies {
     implementation("androidx.media3:media3-ui:1.4.0")
     //showcase
     implementation ("com.github.mreram:showcaseview:1.4.1")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }

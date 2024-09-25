@@ -12,7 +12,7 @@ import com.neko.hiepdph.mypiano.data.model.MicRecord
 
 @Dao
 interface MicRecordDao {
-    @Query("select * from mic_record")
+    @Query("select * from mic_record order by id DESC")
     fun getListMicRecord(): LiveData<List<MicRecord>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -10,7 +10,7 @@ import com.neko.hiepdph.mypiano.data.model.KeysRecord
 
 @Dao
 interface KeyRecordDao {
-    @Query("select * from key_record")
+    @Query("select * from key_record order by id DESC")
     fun getListKeyRecord(): LiveData<List<KeysRecord>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -41,14 +41,14 @@ class DrumSetActivity : BaseActivity<ActivityDrumsetBinding>() {
     private var ride: Int? = null
     override fun initView() {
         val audioAttributes: AudioAttributes =
-            AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME)
+            AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build()
         soundPool =
             SoundPool.Builder().setMaxStreams(30).setAudioAttributes(audioAttributes).build()
 
-        crash1 = soundPool?.load(this, R.raw.jazz_crash1, 0)
+        crash1 = soundPool?.load(this, R.raw.crash1, 0)
         crash2 = soundPool?.load(this, R.raw.jazz_crash2, 0)
-        crash3 = soundPool?.load(this, R.raw.jazz_crash3, 0)
+        crash3 = soundPool?.load(this, R.raw.crash1, 0)
         hihatOpen = soundPool?.load(this, R.raw.hihat_open, 0)
         hihatPedal = soundPool?.load(this, R.raw.hihat_pedal, 0)
         bell = soundPool?.load(this, R.raw.bell, 0)
@@ -177,7 +177,6 @@ class DrumSetActivity : BaseActivity<ActivityDrumsetBinding>() {
 
         binding.btnStyle.clickWithDebounce {
             startActivity(Intent(this, StyleDrumActivity::class.java))
-            finish()
         }
 
         binding.crashLeft.setOnTouchListener { view, motionEvent ->

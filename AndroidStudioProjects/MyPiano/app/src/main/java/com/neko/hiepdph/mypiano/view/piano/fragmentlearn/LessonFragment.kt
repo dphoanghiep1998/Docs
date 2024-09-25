@@ -53,7 +53,7 @@ class LessonFragment : BaseFragment<FragmentLessonBinding>() {
 
     private fun setSongAutoPlay(index: Int) {
         requireActivity().config.indexSong = index
-//        requireActivity().setResult(101)
+        requireActivity().setResult(101)
 //        requireActivity().finish()
         val intent = Intent(requireContext(), PianoActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

@@ -35,9 +35,18 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/_15sdp"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/_4sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        android:background="@drawable/ic_bg_text_style"
+        android:fontFamily="@font/font_500"
         app:layout_constraintBottom_toTopOf="@id/viewpager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"

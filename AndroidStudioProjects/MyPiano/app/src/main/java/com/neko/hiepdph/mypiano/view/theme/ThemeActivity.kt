@@ -1,5 +1,6 @@
 package com.neko.hiepdph.mypiano.view.theme
 
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.neko.hiepdph.mypiano.R
@@ -22,6 +23,9 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         binding.btnApply.isEnabled = true
         binding.btnApply.setTextColor(getColor(R.color.white))
         binding.btnApply.setBackgroundResource(R.drawable.bg_gradient_learn)
+
+        binding.rcvTheme.setHasFixedSize(true)
+
         currentIndex = config.indexThumbMain
         binding.btnBack.clickWithDebounce {
             finish()

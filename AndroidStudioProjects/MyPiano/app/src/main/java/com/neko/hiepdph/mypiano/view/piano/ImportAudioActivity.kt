@@ -41,8 +41,9 @@ class ImportAudioActivity : BaseActivity<ActivityImportAudioBinding>() {
     private fun getData() {
         lifecycleScope.launch(Dispatchers.IO) {
             val listFile = FileUtils.getFileAudio(this@ImportAudioActivity)
-            adapter?.setData(listFile)
-
+            launch(Dispatchers.Main) {
+                adapter?.setData(listFile)
+            }
         }
     }
 

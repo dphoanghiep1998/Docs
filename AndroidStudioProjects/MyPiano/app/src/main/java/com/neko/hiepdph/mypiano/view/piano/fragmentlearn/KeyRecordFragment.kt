@@ -37,8 +37,10 @@ class KeyRecordFragment : BaseFragment<FragmentKeyRecordBinding>() {
         viewModel.getListKeyRecord().observe(this) {
             if (it.isEmpty()) {
                 binding.icEmpty.show()
+                binding.tvEmpty.show()
             } else {
                 binding.icEmpty.hide()
+                binding.tvEmpty.hide()
             }
             adapter?.setData(it.toMutableList())
         }
@@ -71,7 +73,7 @@ class KeyRecordFragment : BaseFragment<FragmentKeyRecordBinding>() {
     private fun setSongAutoPlay(item: KeysRecord) {
         val intent = Intent(requireContext(), PianoActivity::class.java)
         intent.putExtra(Constant.KEY_RECORD_KEY, item)
-        intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
         requireActivity().finish()
     }

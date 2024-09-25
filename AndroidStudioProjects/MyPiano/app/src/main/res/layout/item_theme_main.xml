@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_marginHorizontal="@dimen/_6sdp"
     android:layout_marginTop="@dimen/_12sdp"
+    android:foreground="@drawable/fg_ripple_effect_12"
     android:background="@drawable/bg_corner_12"
     android:layout_height="wrap_content">
     <com.google.android.material.imageview.ShapeableImageView

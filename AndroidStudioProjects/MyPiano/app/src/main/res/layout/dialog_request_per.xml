@@ -1,72 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="@dimen/_12sdp"
-    android:paddingVertical="@dimen/_12sdp">
+    android:paddingVertical="@dimen/_12sdp"
+    tools:background="#000">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:src="@drawable/ic_record_per"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font_500"
-        android:text="@string/save_file_record"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fontFamily="@font/font_700"
+        android:text="@string/grant_per"
         android:textColor="@color/n6"
         android:textSize="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/image" />
 
-    <LinearLayout
+    <TextView
         android:id="@+id/containerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/bg_n3_stroke_corner_8"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle">
-
-        <EditText
-            android:id="@+id/edtName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/font_400"
-            android:paddingHorizontal="@dimen/_12sdp"
-            android:paddingVertical="@dimen/_6sdp"
-            android:textColor="@color/n6"
-            android:textSize="@dimen/_14sdp" />
-    </LinearLayout>
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fontFamily="@font/font_400"
+        android:gravity="center"
+        android:text="@string/rq_per"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
 
     <TextView
         android:id="@+id/btnCancel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:background="@drawable/bg_n3_corner_8"
-        android:foreground="@drawable/fg_ripple_effect_8"
         android:fontFamily="@font/font_700"
+        android:foreground="@drawable/fg_ripple_effect_8"
         android:gravity="center"
         android:includeFontPadding="false"
         android:paddingVertical="@dimen/_12sdp"
         android:text="@string/cancel"
         android:textColor="@color/n4"
         android:textSize="@dimen/_14sdp"
-        app:layout_constraintEnd_toStartOf="@id/btnSave"
+        app:layout_constraintEnd_toStartOf="@id/btnGrant"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/containerName" />
 
     <TextView
-        android:id="@+id/btnSave"
+        android:id="@+id/btnGrant"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/bg_gradient_learn"
         android:fontFamily="@font/font_700"
-        android:gravity="center"
         android:foreground="@drawable/fg_ripple_effect_8"
+        android:gravity="center"
         android:includeFontPadding="false"
-        android:text="@string/save"
+        android:text="@string/grant"
         android:textColor="@color/n6"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintBottom_toBottomOf="@id/btnCancel"

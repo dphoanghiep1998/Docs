@@ -33,7 +33,7 @@ public class AudioUtils implements LoadAudioMessage {
     private ExecutorService service = Executors.newCachedThreadPool();
     //最大音频数目
     private final static int MAX_STREAM = 11;
-    private static AudioUtils instance = null;
+    public static AudioUtils instance = null;
     //消息ID
     private final static int LOAD_START = 1;
     private final static int LOAD_FINISH = 2;
@@ -54,9 +54,9 @@ public class AudioUtils implements LoadAudioMessage {
     private SparseIntArray whiteKeyMusics = new SparseIntArray();
     private SparseIntArray blackKeyMusics = new SparseIntArray();
     //是否加载成功
-    private boolean isLoadFinish = false;
+     public boolean isLoadFinish = false;
     //是否正在加载
-    private boolean isLoading = false;
+    public boolean isLoading = false;
     //用于处理进度消息
     private Handler handler;
     private AudioManager audioManager;
@@ -109,6 +109,7 @@ public class AudioUtils implements LoadAudioMessage {
         if (piano != null) {
             Log.d("TAG", "loadMusic: ");
             if (!isLoading && !isLoadFinish) {
+                Log.d("TAG", "isLoadFinish: ");
                 isLoading = true;
                 pool.setOnLoadCompleteListener((soundPool, sampleId, status) -> {
                     loadNum++;
@@ -118,9 +119,9 @@ public class AudioUtils implements LoadAudioMessage {
                         sendFinishMessage();
                         //静音播放一个音频,防止延时
                         if (MyExtensionKt.getConfig(context).getPitch()) {
-                            pool.play(whiteKeyMusics.get(0), 0, 0, 1, -1, .5f);
+                            pool.play(whiteKeyMusics.get(0), 1, 1, 1, -1, .5f);
                         } else {
-                            pool.play(whiteKeyMusics.get(0), 0, 0, 1, -1, 1f);
+                            pool.play(whiteKeyMusics.get(0), 1, 1, 1, -1, 1f);
                         }
                     } else {
                         if (System.currentTimeMillis() - currentTime >= SEND_PROGRESS_MESSAGE_BREAK_TIME) {
@@ -235,13 +236,13 @@ public class AudioUtils implements LoadAudioMessage {
             float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
             volume = actualVolume / maxVolume;
         }
-        if (volume <= 0) {
-            volume = 1f;
-        }
+//        if (volume <= 0) {
+//            volume = 1f;
+//        }
         if (MyExtensionKt.getConfig(context).getPitch()) {
-            pool.play(soundId, volume, volume, 1, 0, .5f);
+            pool.play(soundId, 1, 1, 1, 0, .5f);
         } else {
-            pool.play(soundId, volume, volume, 1, 0, 1f);
+            pool.play(soundId, 1, 1, 1, 0, 1f);
         }
 
 

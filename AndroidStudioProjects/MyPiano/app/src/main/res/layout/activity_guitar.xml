@@ -27,6 +27,8 @@
             android:id="@+id/string_1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_6sdp"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_guitar_string_1"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_7sdp"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_guitar_string_2"
             app:layout_constraintTop_toBottomOf="@id/string_1" />
 
@@ -43,30 +47,38 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_guitar_string_3"
             app:layout_constraintTop_toBottomOf="@id/string_2" />
 
         <ImageView
             android:id="@+id/string_4"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_height="@dimen/_18sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:src="@drawable/ic_guitar_string_4"
+            android:paddingVertical="@dimen/_7sdp"
+            android:scaleType="fitXY"
             app:layout_constraintTop_toBottomOf="@id/string_3" />
 
         <ImageView
             android:id="@+id/string_5"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_height="@dimen/_18sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_guitar_string_5"
             app:layout_constraintTop_toBottomOf="@id/string_4" />
 
         <ImageView
             android:id="@+id/string_6"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_height="@dimen/_19sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_9sdp"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_guitar_string_6"
             app:layout_constraintTop_toBottomOf="@id/string_5" />
     </androidx.constraintlayout.widget.ConstraintLayout>

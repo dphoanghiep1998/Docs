@@ -207,7 +207,10 @@ public class PianoView extends View {
         piano = null;
         whitePianoKeys = null;
         blackPianoKeys = null;
+//        utils.isLoadFinish = false;
+//        utils.isLoading = false;
         utils = null;
+        AudioUtils.instance = null;
         invalidate();
     }
 
@@ -222,7 +225,6 @@ public class PianoView extends View {
             whitePianoKeys = piano.getWhitePianoKeys();
             //获取黑键
             blackPianoKeys = piano.getBlackPianoKeys();
-            Log.d(TAG, "onDraw: ");
             //初始化播放器
             if (utils == null) {
                 if (maxStream > 0) {

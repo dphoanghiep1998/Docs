@@ -35,7 +35,7 @@ class SaxophoneActivity : BaseActivity<ActivitySaxophoneBinding>() {
 
     private fun initSoundPool() {
         val audioAttributes: AudioAttributes =
-            AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME)
+            AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build()
 
         soundPool =
@@ -45,13 +45,13 @@ class SaxophoneActivity : BaseActivity<ActivitySaxophoneBinding>() {
         sound2 = soundPool?.load(this, R.raw.sound_2, 0)
         sound3 = soundPool?.load(this, R.raw.sound_3, 0)
         sound4 = soundPool?.load(this, R.raw.sound_4, 0)
-        sound5 = soundPool?.load(this, R.raw.sound_5, 0)
-        sound6 = soundPool?.load(this, R.raw.sound_6, 0)
-        sound7 = soundPool?.load(this, R.raw.sound_7, 0)
-        sound8 = soundPool?.load(this, R.raw.sound_8, 0)
-        sound9 = soundPool?.load(this, R.raw.sound_9, 0)
-        sound10 = soundPool?.load(this, R.raw.sound_10, 0)
-        sound11 = soundPool?.load(this, R.raw.sound_11, 0)
+        sound5 = soundPool?.load(this, R.raw.sound_6, 0)
+        sound6 = soundPool?.load(this, R.raw.sound_7, 0)
+        sound7 = soundPool?.load(this, R.raw.sound_8, 0)
+        sound8 = soundPool?.load(this, R.raw.sound_9, 0)
+        sound9 = soundPool?.load(this, R.raw.sound_10, 0)
+        sound10 = soundPool?.load(this, R.raw.sound_11, 0)
+        sound11 = soundPool?.load(this, R.raw.sound_12, 0)
     }
 
     override fun initView() {

@@ -14,6 +14,7 @@ import com.neko.hiepdph.mypiano.common.base_component.BaseActivity
 import com.neko.hiepdph.mypiano.common.clickWithDebounce
 import com.neko.hiepdph.mypiano.common.config
 import com.neko.hiepdph.mypiano.databinding.ActivityGuitarBinding
+import com.neko.hiepdph.mypiano.view.main.MainActivity
 
 
 class GuitarActivity : BaseActivity<ActivityGuitarBinding>() {
@@ -88,6 +89,9 @@ class GuitarActivity : BaseActivity<ActivityGuitarBinding>() {
             if (!config.isUserRated) {
                 setResult(3001)
             }
+            startActivity(Intent(this,MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            })
             finish()
         }
 
@@ -95,26 +99,57 @@ class GuitarActivity : BaseActivity<ActivityGuitarBinding>() {
             startActivity(Intent(this, StyleGuitarActivity::class.java))
             finish()
         }
+        val listString = mutableListOf(
+            binding.string1,
+            binding.string2,
+            binding.string3,
+            binding.string4,
+            binding.string5,
+            binding.string6,
+        )
         val listItem = mutableListOf(
             binding.btnAm,
             binding.btnBm,
+            binding.btnDm,
+            binding.btnEm,
             binding.btnC,
             binding.btnE,
-            binding.btnEm,
-            binding.btnDm,
             binding.btnF,
             binding.btnG
         )
 
         val listNote = mutableListOf(
-            AM, BM, C, E, EM, DM, F, G
+            AM, BM, DM, EM, C, E, F, G
         )
         listItem.forEachIndexed { index, item ->
             item.clickWithDebounce {
                 if (flag == index) {
                     item.setBackgroundResource(R.drawable.ic_bg_guitar_note)
                     flag = -1
+                    listString.forEachIndexed { mIndex, item ->
+                        listString[mIndex].alpha = 1f
+                    }
                     return@clickWithDebounce
+                }
+
+                if(index == 0 || index == 1 || index == 4){
+                    listString.forEachIndexed { mIndex, item ->
+                        if(mIndex == 0){
+                            listString[mIndex].alpha = .3f
+                        }else{
+                            listString[mIndex].alpha = 1f
+                        }
+                    }
+                }
+
+                if(index == 2){
+                    listString.forEachIndexed { mIndex, item ->
+                        if(mIndex == 0 || mIndex == 1){
+                            listString[mIndex].alpha = .3f
+                        }else{
+                            listString[mIndex].alpha = 1f
+                        }
+                    }
                 }
                 item.setBackgroundResource(R.drawable.ic_bg_guitar_note_active)
                 flag = listNote[index]
@@ -679,9 +714,11 @@ class GuitarActivity : BaseActivity<ActivityGuitarBinding>() {
     private fun startStringAnimation(index: Int, view: View) {
         val upAnimator = ObjectAnimator.ofFloat(view, "translationY", 0f, -15f)
         upAnimator.duration = 25
+        upAnimator.repeatCount = 3
         upAnimator.interpolator = AccelerateDecelerateInterpolator()
         val downAnimator = ObjectAnimator.ofFloat(view, "translationY", -15f, 0f)
         downAnimator.duration = 25
+        downAnimator.repeatCount = 3
         downAnimator.interpolator = AccelerateDecelerateInterpolator()
         val animatorSet = AnimatorSet()
         animatorSet.playSequentially(upAnimator, downAnimator)
@@ -706,14 +743,14 @@ class GuitarActivity : BaseActivity<ActivityGuitarBinding>() {
 
     companion object {
         const val AM = 0
-        const val C = 1
-        const val B = 2
-        const val BM = 8
-        const val E = 3
-        const val DM = 4
-        const val F = 5
-        const val EM = 6
-        const val G = 7
+        const val C = 4
+        const val B = 5
+        const val BM = 1
+        const val E = 6
+        const val DM = 2
+        const val F = 7
+        const val EM = 3
+        const val G = 8
     }
 
 }

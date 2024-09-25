@@ -19,6 +19,7 @@ import com.neko.hiepdph.mypiano.databinding.LayoutMenuMicRecordBinding
 class MicRecordAdapter(
     val onClickItem: (MicRecord) -> Unit,
     val onClearItem: () -> Unit,
+    val onSuspendItem:()->Unit,
     val onDelete: (MicRecord) -> Unit,
     val onShare: (MicRecord) -> Unit,
     val onRename: (MicRecord) -> Unit
@@ -67,6 +68,7 @@ class MicRecordAdapter(
             binding.tvDuration.text = DateUtils.convertSecondToString(item.duration)
             binding.tvTime.text = DateUtils.convertTimeInMillisecondToTimeString(item.time)
             binding.btnOption.clickWithDebounce {
+                onSuspendItem?.invoke()
                 showWindowPopup(itemView.context,item,binding.btnOption)
             }
             binding.root.clickWithDebounce {

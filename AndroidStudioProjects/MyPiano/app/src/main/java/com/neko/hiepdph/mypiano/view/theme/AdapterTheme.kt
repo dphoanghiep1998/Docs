@@ -3,6 +3,7 @@ package com.neko.hiepdph.mypiano.view.theme
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.neko.hiepdph.mypiano.R
 import com.neko.hiepdph.mypiano.common.clickWithDebounce
 import com.neko.hiepdph.mypiano.data.model.ThemeMainModel
@@ -40,7 +41,8 @@ class AdapterTheme(val onclick: (ThemeMainModel) -> Unit) :
     override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) {
         with(holder) {
             val item = listData[absoluteAdapterPosition]
-            binding.imageFull.setImageResource(item.resId)
+//            binding.imageFull.setImageResource(item.resId)
+            Glide.with(binding.imageFull).load(item.resId).into(binding.imageFull)
             if (absoluteAdapterPosition == selectedIndex) {
                 binding.tick.setImageResource(R.drawable.ic_tick_on)
             } else {
@@ -48,7 +50,7 @@ class AdapterTheme(val onclick: (ThemeMainModel) -> Unit) :
             }
 
             binding.root.clickWithDebounce {
-                notifyItemChanged(selectedIndex)
+                notifyItemChanged(selectedIndex,Unit)
                 selectedIndex = adapterPosition
                 notifyItemChanged(selectedIndex)
                 onclick(item)

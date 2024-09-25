@@ -46,7 +46,6 @@ class MicRecordFragment : BaseFragment<FragmentMicRecordBinding>() {
             @OptIn(UnstableApi::class)
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 super.onPlayerStateChanged(playWhenReady, playbackState)
-                Log.d("TAG", "onPlayerStateChanged: " + playbackState)
 
                 if (playbackState == Player.STATE_ENDED) {
                     adapter?.resetStatus()
@@ -62,8 +61,10 @@ class MicRecordFragment : BaseFragment<FragmentMicRecordBinding>() {
         viewModel.getListMicRecord().observe(this) {
             if (it.isEmpty()) {
                 binding.icEmpty.show()
+                binding.tvEmpty.show()
             } else {
                 binding.icEmpty.hide()
+                binding.tvEmpty.hide()
             }
             adapter?.setData(it.toMutableList())
         }
@@ -77,6 +78,10 @@ class MicRecordFragment : BaseFragment<FragmentMicRecordBinding>() {
 //            }
             exoPlayer?.setMediaItem(MediaItem.fromUri(it.path))
             exoPlayer?.prepare()
+        }, onSuspendItem = {
+            if (exoPlayer?.isPlaying == true) {
+                exoPlayer?.stop()
+            }
         }, onClearItem = {
             if (exoPlayer?.isPlaying == true) {
                 exoPlayer?.stop()
